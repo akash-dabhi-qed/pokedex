@@ -17,7 +17,6 @@ async function fetchPokemon(): Promise<Pokemon[]> {
 	const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
 	const data = await res.json();
 
-	// Fetch individual Pokemon details concurrently
 	const pokemonDetailsPromises = data.results.map(
 		async (pokemon: { url: string }) => {
 			const res = await fetch(pokemon.url);
@@ -25,7 +24,6 @@ async function fetchPokemon(): Promise<Pokemon[]> {
 		}
 	);
 
-	// Wait for all details to be fetched
 	const pokemonDetails = await Promise.all(pokemonDetailsPromises);
 
 	return pokemonDetails;
@@ -35,7 +33,6 @@ export default function Sidebar() {
 	const [isSidebarOpen, setSidebarOpen] = useState(false);
 	const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
 
-	// Fetch the Pokémon list when the component mounts
 	useEffect(() => {
 		const loadPokemon = async () => {
 			const data = await fetchPokemon();
@@ -44,14 +41,12 @@ export default function Sidebar() {
 		loadPokemon();
 	}, []);
 
-	// Function to close the sidebar after selecting a Pokémon
 	const handleLinkClick = () => {
 		setSidebarOpen(false);
 	};
 
 	return (
 		<>
-			{/* Toggle button for mobile */}
 			<button
 				className="md:hidden bg-slate-800 text-white p-2 rounded-md"
 				onClick={() => setSidebarOpen(!isSidebarOpen)}
@@ -59,7 +54,6 @@ export default function Sidebar() {
 				{isSidebarOpen ? "Close Pokemon List" : "Open Pokemon List"}
 			</button>
 
-			{/* Sidebar for larger screens and mobile toggle */}
 			<aside
 				className={`sidebar bg-slate-800 p-4 fixed top-0 left-0 h-full z-50 transform ${
 					isSidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -74,7 +68,7 @@ export default function Sidebar() {
 							<Link
 								href={`/pokemon/${index + 1}`}
 								className="flex items-center justify-between p-2 hover:bg-slate-700 rounded-md"
-								onClick={handleLinkClick} // Close the sidebar when a Pokémon is selected
+								onClick={handleLinkClick}
 							>
 								<span>{pokemon.name}</span>
 								<PokemonImage
@@ -89,7 +83,6 @@ export default function Sidebar() {
 				</ul>
 			</aside>
 
-			{/* Overlay when the sidebar is open on mobile */}
 			{isSidebarOpen && (
 				<div
 					className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"

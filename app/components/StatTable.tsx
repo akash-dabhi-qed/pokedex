@@ -17,27 +17,22 @@ const Stats: React.FC<StatsProps> = ({ stats }) => {
 					Base Stats
 				</h2>
 
-				{/* Grid with 6 columns */}
 				<div className="grid grid-cols-6 gap-1 text-center">
 					{stats.map((stat) => (
 						<div
 							key={stat.name}
 							className="flex flex-col items-center space-y-2"
 						>
-							{/* Stat Value */}
-
-							{/* Progress bar for stat value */}
 							<div className="bg-green-500 h-[200px] w-12">
 								<div
 									className="bg-gray-100 w-12"
-									style={{ height: `${100 - (stat.value / 255) * 100}%` }} // Assuming 255 is max stat value
+									style={{ height: `${100 - (stat.value / 255) * 100}%` }}
 								></div>
 								<span className="text-sm font-normal text-gray-800 text-[16px]">
 									{stat.value}
 								</span>
 							</div>
 
-							{/* Stat Name */}
 							<span className="text-[12px] font-normal text-gray-900 tracking-[-1px]">
 								{stat.name.toUpperCase()}
 							</span>
@@ -50,16 +45,12 @@ const Stats: React.FC<StatsProps> = ({ stats }) => {
 					Base Stats
 				</h2>
 
-				{/* Responsive Grid: 6 columns on larger screens, fewer on smaller screens */}
 				<div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 text-center">
 					{stats.map((stat) => (
 						<div
 							key={stat.name}
 							className="flex flex-col items-center space-y-2"
 						>
-							{/* Stat Value */}
-
-							{/* Progress bar for stat value */}
 							<div className="bg-green-500 h-[150px] sm:h-[180px] md:h-[200px] w-10 sm:w-12">
 								<div
 									className="bg-gray-100 w-full"
@@ -70,8 +61,7 @@ const Stats: React.FC<StatsProps> = ({ stats }) => {
 								</span>
 							</div>
 
-							{/* Stat Name */}
-							<span className="text-[10px] sm:text-[12px] font-normal text-gray-900 tracking-[-1px]">
+							<span className="text-[12px] sm:text-[12px] font-normal text-gray-900 tracking-[-1px]">
 								{stat.name.toUpperCase()}
 							</span>
 						</div>
