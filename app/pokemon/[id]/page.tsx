@@ -119,7 +119,7 @@ export default async function PokemonDetails({
 		<div className="bg-gray-100 min-h-screen flex flex-col items-center justify-start p-4 font-silkscreen">
 			<PokemonHeader name={pokemon.name} />
 
-			<div className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+			<div className="bg-white mt-8 p-4 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-between">
 				<PokemonImage
 					src={pokemon.sprites.other["official-artwork"].front_default}
 					name={pokemon.name}
@@ -133,13 +133,13 @@ export default async function PokemonDetails({
 					baseExperience={pokemon.base_experience}
 				/>
 
-				<div className="mt-4 flex gap-4">
+				<div className="mt-4 flex gap-4 flex-wrap">
 					<PokemonTypes types={pokemon.types} />
 					<PokemonAbilities abilities={pokemon.abilities} />
 				</div>
 			</div>
 
-			<div className="bg-white mt-8 p-4 rounded-lg shadow-md flex flex-row items-center justify-between">
+			<div className="bg-white mt-8 p-4 rounded-lg shadow-md flex flex-col md:flex-row items-center justify-between">
 				<PokemonStats stats={formattedStats} />
 				<PokemonMoves moves={pokemon.moves} />
 				<div className="flex-1 ml-5">

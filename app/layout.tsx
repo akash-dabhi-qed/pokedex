@@ -13,9 +13,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en" className={silkscreen.className}>
 			<body>
-				<div className="">
+				<div className="flex flex-col md:flex-row">
 					<Sidebar />
-					<main className="">{children}</main>
+					<main className="flex-1 p-4">{children}</main>
 				</div>
 			</body>
 		</html>

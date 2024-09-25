@@ -10,9 +10,18 @@
 
 .wrapper {
 	position: absolute;
-	top: 15%;
-	left: 25%;
+	top: 40%;
+	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+@media (min-width: 768px) {
+	.md\:wrap {
+		position: absolute;
+		top: 40%;
+		left: 63%;
+		transform: translate(-50%, -50%);
+	}
 }
 
 .pokeball {

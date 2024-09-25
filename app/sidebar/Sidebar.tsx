@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import PokemonImage from "../components/PokemonImage";
 
@@ -29,31 +31,71 @@ async function fetchPokemon(): Promise<Pokemon[]> {
 	return pokemonDetails;
 }
 
-export default async function Sidebar() {
-	const pokemonList = await fetchPokemon();
+export default function Sidebar() {
+	const [isSidebarOpen, setSidebarOpen] = useState(false);
+	const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+
+	// Fetch the Pokémon list when the component mounts
+	useEffect(() => {
+		const loadPokemon = async () => {
+			const data = await fetchPokemon();
+			setPokemonList(data);
+		};
+		loadPokemon();
+	}, []);
+
+	// Function to close the sidebar after selecting a Pokémon
+	const handleLinkClick = () => {
+		setSidebarOpen(false);
+	};
 
 	return (
-		<aside className="sidebar w-[20%] float-left">
-			<ul className="bg-slate-800 max-h-[928px] overflow-y-scroll ">
-				{pokemonList.map((pokemon, index) => (
-					<li
-						key={index}
-						className="text-center text-xl font-normal font-silkscreen"
-					>
-						<Link href={`/pokemon/${index + 1}`}>
-							{pokemon.name}
-							<span className="inline-block align-middle">
+		<>
+			{/* Toggle button for mobile */}
+			<button
+				className="md:hidden bg-slate-800 text-white p-2 rounded-md"
+				onClick={() => setSidebarOpen(!isSidebarOpen)}
+			>
+				{isSidebarOpen ? "Close Pokemon List" : "Open Pokemon List"}
+			</button>
+
+			{/* Sidebar for larger screens and mobile toggle */}
+			<aside
+				className={`sidebar bg-slate-800 p-4 fixed top-0 left-0 h-full z-50 transform ${
+					isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+				} transition-transform md:relative md:translate-x-0 md:w-1/4`}
+			>
+				<ul className="max-h-[928px] overflow-y-scroll text-white">
+					{pokemonList.map((pokemon, index) => (
+						<li
+							key={index}
+							className="text-center text-xl font-normal font-silkscreen mb-2"
+						>
+							<Link
+								href={`/pokemon/${index + 1}`}
+								className="flex items-center justify-between p-2 hover:bg-slate-700 rounded-md"
+								onClick={handleLinkClick} // Close the sidebar when a Pokémon is selected
+							>
+								<span>{pokemon.name}</span>
 								<PokemonImage
 									src={pokemon.sprites.front_default}
 									name={pokemon.name}
 									height={30}
 									width={30}
 								/>
-							</span>
-						</Link>
-					</li>
-				))}
-			</ul>
-		</aside>
+							</Link>
+						</li>
+					))}
+				</ul>
+			</aside>
+
+			{/* Overlay when the sidebar is open on mobile */}
+			{isSidebarOpen && (
+				<div
+					className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+					onClick={() => setSidebarOpen(false)}
+				></div>
+			)}
+		</>
 	);
 }

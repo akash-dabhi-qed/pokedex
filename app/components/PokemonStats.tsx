@@ -6,7 +6,7 @@ interface PokemonStatsProps {
 
 export default function PokemonStats({ stats }: PokemonStatsProps) {
 	return (
-		<div className="flex-1 mr-8">
+		<div className="flex-1 md:mr-8">
 			<h2 className="text-2xl font-normal font-silkscreen text-black mb-4">
 				Stats
 			</h2>
