@@ -2,26 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.wrapper {
+	position: absolute;
+	top: 15%;
+	left: 25%;
+	transform: translate(-50%, -50%);
+}
+
+.pokeball {
+	width: 60px;
+	height: 60px;
+	background-color: #fff;
+	border-radius: 50%;
+	position: relative;
+	overflow: hidden;
+	border: 4px solid #000;
+	animation: frames 0.8s linear 0s infinite;
+}
+
+.pokeball:after {
+	content: "";
+	position: absolute;
+	width: 60px;
+	height: 38px;
+	background-color: red;
+	border-bottom: 4px solid #000;
+	top: -4px;
+}
+
+.pokeball:before {
+	content: "";
+	position: absolute;
+	background-color: #fff;
+	width: 10px;
+	height: 10px;
+	border: 6px solid #000;
+	border-radius: 50%;
+	bottom: 18px;
+	right: 18px;
+	z-index: 1;
+}
+
+/* AnimationFrames */
+@keyframes frames {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #ffffff;
+	--foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap");
+
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+	color: var(--foreground);
+	background: var(--background);
+	font-family: var(--font-silkscreen), cursive;
+}
+
+.rotate-90-left {
+	transform: rotate(-90deg);
+}
+.rotate-90-right {
+	transform: rotate(90deg);
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+	.text-balance {
+		text-wrap: balance;
+	}
 }
