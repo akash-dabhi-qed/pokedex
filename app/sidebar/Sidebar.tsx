@@ -59,7 +59,7 @@ export default function Sidebar() {
 					isSidebarOpen ? "translate-x-0" : "-translate-x-full"
 				} transition-transform md:relative md:translate-x-0 md:w-1/4`}
 			>
-				<ul className="max-h-[928px] overflow-y-scroll text-white">
+				<ul className="max-h-[808px] overflow-y-scroll text-white">
 					{pokemonList.map((pokemon, index) => (
 						<li
 							key={index}
